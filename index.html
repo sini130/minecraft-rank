@@ -47,7 +47,7 @@
         .hidden { display: none; }
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* יחס מסך 16:9 */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             max-width: 100%;
@@ -129,10 +129,8 @@
     }
 
     function sendToDiscord() {
-        // ניקוי רווחים מיותרים מהקלט של המשתמש
         const discordIdInput = document.getElementById('discord-username').value.trim();
         
-        // בדיקה שהקלט מכיל רק מספרים (כמו ש-ID של דיסקורד צריך להיות)
         if (!discordIdInput || isNaN(discordIdInput)) {
             alert("שגיאה: אנא הכנס User ID תקין (מספרים בלבד, ללא אותיות או סימנים)");
             return;
@@ -140,10 +138,11 @@
 
         const makeWebhookUrl = "https://hook.eu1.make.com/onae45sqzvwee9crssbk2a35297tbwwd";
 
+        // שינוי שם השדה ל-userId כדי שיתאים בול לציפיות של Make ודיסקורד
         const messageData = {
             googleName: loggedInUser.displayName,
             email: loggedInUser.email,
-            discordUser: discordIdInput // שולח את ה-ID הנקי
+            userId: discordIdInput 
         };
 
         fetch(makeWebhookUrl, {
