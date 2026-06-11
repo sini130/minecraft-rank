@@ -138,11 +138,11 @@
 
         const makeWebhookUrl = "https://hook.eu1.make.com/onae45sqzvwee9crssbk2a35297tbwwd";
 
-        // שינוי שם השדה ל-userId כדי שיתאים בול לציפיות של Make ודיסקורד
+        // השדה נשלח בשם שמתאים בול למה שמופיע אצלך ב-Make
         const messageData = {
             googleName: loggedInUser.displayName,
             email: loggedInUser.email,
-            userId: discordIdInput 
+            discordUser: discordIdInput 
         };
 
         fetch(makeWebhookUrl, {
