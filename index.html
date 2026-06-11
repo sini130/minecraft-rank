@@ -72,4 +72,65 @@
         apiKey: "AIzaSyBf3a5Q-cDfmVPvto4w-Ue6hpeSJrQPU_k",
         authDomain: "minecraft-israel-auth.firebaseapp.com",
         projectId: "minecraft-israel-auth",
-        storageBucket: "minecraft-
+        storageBucket: "minecraft-israel-auth.appspot.com",
+        messagingSenderId: "14356543924",
+        appId: "1:14356543924:web:c65c811aba1d5766919ae1"
+    };
+    
+    // אתחול Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    let loggedInUser = null;
+
+    // פונקציית התחברות לגוגל
+    function loginWithGoogle() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider).then((result) => {
+            loggedInUser = result.user;
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('discord-section').classList.remove('hidden');
+            document.getElementById('user-name').innerText = loggedInUser.displayName;
+        }).catch((error) => {
+            console.error("שגיאה ב-Firebase Auth:", error);
+            alert("שגיאה בהתחברות: " + error.message);
+        });
+    }
+
+    // פונקציה ששולחת את המידע לדיסקורד שלך
+    function sendToDiscord() {
+        const discordName = document.getElementById('discord-username').value;
+        if (!discordName) {
+            alert("אנא הכנס שם משתמש בדיסקורד");
+            return;
+        }
+
+        // כאן הגדרתי את ה-Webhook שמקושר לשרת שלך
+        const webhookUrl = "https://discord.com/api/webhooks/1382992209707204648/qYyT4G3K-8j-eX7uX4_yR269zV6pLREuXf7X8_Lz3W3k-X5zY_zP";
+
+        const messageData = {
+            embeds: [{
+                title: "🎉 שחקן חדש נרשם לראנק!",
+                color: 5814783,
+                fields: [
+                    { name: "שם בגוגל:", value: loggedInUser.displayName, inline: true },
+                    { name: "אימייל:", value: loggedInUser.email, inline: true },
+                    { name: "משתמש דיסקורד שצריך ראנק:", value: discordName, inline: false }
+                ]
+            }]
+        };
+
+        fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(messageData)
+        }).then(() => {
+            alert("ההרשמה הצליחה! מנהל השרת יעניק לך את הראנק בהקדם.");
+        }).catch((error) => {
+            console.error("שגיאה בשליחת Webhook:", error);
+            alert("הייתה בעיה בשליחת הנתונים לדיסקורד.");
+        });
+    }
+</script>
+
+</body>
+</html>
