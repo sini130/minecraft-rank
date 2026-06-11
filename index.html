@@ -45,12 +45,24 @@
             text-align: center;
         }
         .hidden { display: none; }
-        video {
-            width: 100%;
-            max-width: 400px;
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* יחס מסך 16:9 */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
             border-radius: 8px;
             margin: 15px 0;
             border: 1px solid #7289da;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
         }
         .instructions {
             font-size: 14px;
@@ -74,12 +86,11 @@
         
         <hr style="border-color: #4f545c; margin: 20px 0;">
         
-        <p class="instructions">🎥 צפה בסרטון ההסבר קצר כדי להבין איך להשיג את ה-User ID שלך:</p>
+        <p class="instructions">🎥 צפה בסרטון ההסבר כדי להבין איך להשיג את ה-User ID שלך:</p>
         
-        <video controls>
-            <source src="id-tutorial.mp4" type="video/mp4">
-            הדפדפן שלך לא תומך בהצגת הסרטון.
-        </video>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/EVXZy7cWVjk" allowfullscreen></iframe>
+        </div>
 
         <p>אנא הכנס את ה-**User ID** שלך בדיסקורד (מספרים בלבד):</p>
         <input type="text" id="discord-username" placeholder="הדבק את ה-ID כאן..."><br>
