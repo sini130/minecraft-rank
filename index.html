@@ -19,6 +19,8 @@
             display: inline-block;
             box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
             border: 2px solid #7289da;
+            max-width: 500px;
+            width: 100%;
         }
         h1 { color: #5865F2; }
         button {
@@ -43,6 +45,18 @@
             text-align: center;
         }
         .hidden { display: none; }
+        video {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #7289da;
+        }
+        .instructions {
+            font-size: 14px;
+            color: #b9bbbe;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
@@ -57,8 +71,18 @@
 
     <div id="discord-section" class="hidden">
         <p>שלום, <span id="user-name"></span>! התחברת בהצלחה.</p>
-        <p>עכשיו, אנא הכנס את שם המשתמש שלך בדיסקורד (לדוגמה: username):</p>
-        <input type="text" id="discord-username" placeholder="הדיסקורד שלך..."><br>
+        
+        <hr style="border-color: #4f545c; margin: 20px 0;">
+        
+        <p class="instructions">🎥 צפה בסרטון ההסבר קצר כדי להבין איך להשיג את ה-User ID שלך:</p>
+        
+        <video controls>
+            <source src="id-tutorial.mp4" type="video/mp4">
+            הדפדפן שלך לא תומך בהצגת הסרטון.
+        </video>
+
+        <p>אנא הכנס את ה-**User ID** שלך בדיסקורד (מספרים בלבד):</p>
+        <input type="text" id="discord-username" placeholder="הדבק את ה-ID כאן..."><br>
         <button style="background-color: #5865F2;" onclick="sendToDiscord()">קבלת הראנק</button>
     </div>
 </div>
@@ -81,7 +105,6 @@
     const auth = firebase.auth();
     let loggedInUser = null;
 
-    // פונקציית התחברות לגוגל
     function loginWithGoogle() {
         const provider = new firebase.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider).then((result) => {
@@ -95,15 +118,13 @@
         });
     }
 
-    // פונקציה ששולחת את המידע למערכת האוטומציה של Make
     function sendToDiscord() {
         const discordName = document.getElementById('discord-username').value;
         if (!discordName) {
-            alert("אנא הכנס שם משתמש בדיסקורד");
+            alert("אנא הכנס את ה-User ID שלך בדיסקורד");
             return;
         }
 
-        // הקישור הרשמי שקיבלת מ-Make
         const makeWebhookUrl = "https://hook.eu1.make.com/onae45sqzvwee9crssbk2a35297tbwwd";
 
         const messageData = {
