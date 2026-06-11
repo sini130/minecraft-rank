@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הרשמה לראנק - שרת מיינקראפט</title>
+    <style>
+        body {
+            background-color: #2c2f33;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            background-color: #23272a;
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
+            border: 2px solid #7289da;
+        }
+        h1 { color: #5865F2; }
+        button {
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover { background-color: #357ae8; }
+        input {
+            padding: 10px;
+            width: 80%;
+            margin: 15px 0;
+            border-radius: 5px;
+            border: 1px solid #7289da;
+            background-color: #40444b;
+            color: white;
+            text-align: center;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>שרת המיינקראפט של ישראל 🚀</h1>
+    <p>התחבר עם גוגל וקבל ראנק מיוחד בדיסקורד שלנו!</p>
+    
+    <div id="login-section">
+        <button onclick="loginWithGoogle()">התחבר באמצעות Google</button>
+    </div>
+
+    <div id="discord-section" class="hidden">
+        <p>שלום, <span id="user-name"></span>! התחברת בהצלחה.</p>
+        <p>עכשיו, אנא הכנס את שם המשתמש שלך בדיסקורד (לדוגמה: username):</p>
+        <input type="text" id="discord-username" placeholder="הדיסקורד שלך..."><br>
+        <button style="background-color: #5865F2;" onclick="sendToDiscord()">קבלת הראנק</button>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
+<script>
+    // הגדרות ה-Firebase שלך מתוך התמונה
+    const firebaseConfig = {
+        apiKey: "AIzaSyBf3a5Q-cDfmVPvto4w-Ue6hpeSJrQPU_k",
+        authDomain: "minecraft-israel-auth.firebaseapp.com",
+        projectId: "minecraft-israel-auth",
+        storageBucket: "minecraft-
