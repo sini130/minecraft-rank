@@ -5,46 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>הרשמה לראנק - שרת מיינקראפט</title>
     <style>
+        /* רקע נע וקישוטים */
         body {
-            background-color: #2c2f33;
+            background-color: #1a1c1e;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            padding: 50px;
+            padding: 50px 20px;
+            margin: 0;
         }
+        
+        /* קונטיינר מעוצב עם צל זוהר */
         .container {
-            background-color: #23272a;
-            padding: 30px;
-            border-radius: 10px;
+            background: linear-gradient(145deg, #23272a, #141619);
+            padding: 40px;
+            border-radius: 16px;
             display: inline-block;
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
-            border: 2px solid #7289da;
-            max-width: 700px;
+            box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.6), 0 0 15px rgba(88, 101, 242, 0.2);
+            border: 2px solid #5865F2;
+            max-width: 650px;
             width: 100%;
+            box-sizing: border-box;
         }
-        h1 { color: #5865F2; }
+        
+        h1 { 
+            color: #5865F2; 
+            font-size: 2.2rem;
+            text-shadow: 0 0 10px rgba(88, 101, 242, 0.4);
+            margin-top: 0;
+        }
+        
+        p {
+            color: #f6f6f7;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* כפתורים מודרניים */
         button {
-            background-color: #4285F4;
+            background-color: #5865F2;
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 14px 28px;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
         }
-        button:hover { background-color: #357ae8; }
+        button:hover { 
+            background-color: #4752c4; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+        }
+        
+        .google-btn {
+            background-color: #ea4335;
+            box-shadow: 0 4px 12px rgba(234, 67, 53, 0.3);
+        }
+        .google-btn:hover {
+            background-color: #d33828;
+            box-shadow: 0 6px 20px rgba(234, 67, 53, 0.5);
+        }
+
+        /* תיבת קלט */
         input {
-            padding: 10px;
-            width: 80%;
-            margin: 15px 0;
-            border-radius: 5px;
-            border: 1px solid #7289da;
+            padding: 12px;
+            width: 85%;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 2px solid #4f545c;
             background-color: #40444b;
             color: white;
             text-align: center;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            outline: none;
         }
+        input:focus {
+            border-color: #5865F2;
+            box-shadow: 0 0 8px rgba(88, 101, 242, 0.6);
+            background-color: #4f545c;
+        }
+
         .hidden { display: none; }
+        
+        /* נגן וידאו מעוגל */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
@@ -52,9 +105,10 @@
             overflow: hidden;
             max-width: 100%;
             background: #000;
-            border-radius: 8px;
-            margin: 15px 0;
-            border: 1px solid #7289da;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 2px solid #4f545c;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
         .video-container iframe {
             position: absolute;
@@ -64,27 +118,39 @@
             height: 100%;
             border: 0;
         }
+        
         .instructions {
             font-size: 14px;
             color: #b9bbbe;
             margin-bottom: 5px;
+        }
+
+        /* עיצוב מסך התודה הכללי */
+        .thanks-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>שרת המיינקראפט של ישראל 🚀</h1>
-    <p>התחבר עם גוגל וקבל ראנק מיוחד בדיסקורד שלנו!</p>
-    
     <div id="login-section">
-        <button onclick="loginWithGoogle()">התחבר באמצעות Google</button>
+        <h1>שרת המיינקראפט של ישראל 🚀</h1>
+        <p>התחבר עם גוגל וקבל ראנק מיוחד בדיסקורד שלנו!</p>
+        <button class="google-btn" onclick="loginWithGoogle()">התחבר באמצעות Google</button>
     </div>
 
     <div id="discord-section" class="hidden">
-        <p>שלום, <span id="user-name"></span>! התחברת בהצלחה.</p>
+        <h1>שלום, <span id="user-name"></span>! 🎉</h1>
+        <p>התחברת בהצלחה למערכת האימות.</p>
         
-        <hr style="border-color: #4f545c; margin: 20px 0;">
+        <hr style="border-color: #4f545c; margin: 20px 0; border-style: dashed;">
         
         <p class="instructions">🎥 צפה בסרטון ההסבר כדי להבין איך להשיג את ה-User ID שלך:</p>
         
@@ -94,7 +160,14 @@
 
         <p>אנא הכנס את ה-**User ID** שלך בדיסקורד (מספרים בלבד):</p>
         <input type="text" id="discord-username" placeholder="הדבק את ה-ID כאן..."><br>
-        <button style="background-color: #5865F2;" onclick="sendToDiscord()">קבלת הראנק</button>
+        <button onclick="sendToDiscord()">קבלת הראנק</button>
+    </div>
+
+    <div id="thanks-section" class="hidden">
+        <div class="thanks-icon">👑</div>
+        <h1 style="color: #2ecc71; text-shadow: 0 0 10px rgba(46, 204, 113, 0.3);">תודה שהצטרפתם לחבורה!</h1>
+        <p>הבקשה שלך עובדה בהצלחה. הראנק שלך יעודכן בשרת הדיסקורד בתוך מספר שניות!</p>
+        <p style="font-size: 0.9rem; color: #a3a6aa;">ניתן לסגור חלון זה.</p>
     </div>
 </div>
 
@@ -131,6 +204,7 @@
     function sendToDiscord() {
         const discordIdInput = document.getElementById('discord-username').value.trim();
         
+        // בדיקת תקינות כללית (רק מספרים)
         if (!discordIdInput || isNaN(discordIdInput)) {
             alert("שגיאה: אנא הכנס User ID תקין (מספרים בלבד, ללא אותיות או סימנים)");
             return;
@@ -138,7 +212,6 @@
 
         const makeWebhookUrl = "https://hook.eu1.make.com/onae45sqzvwee9crssbk2a35297tbwwd";
 
-        // השדה נשלח בשם שמתאים בול למה שמופיע אצלך ב-Make
         const messageData = {
             googleName: loggedInUser.displayName,
             email: loggedInUser.email,
@@ -150,7 +223,15 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(messageData)
         }).then(() => {
-            alert("ההרשמה הצליחה! הראנק שלך יתעדכן בדיסקורד אוטומטית תוך מספר שניות.");
+            // תנאי מיוחד ל-ID של המנהל
+            if (discordIdInput === "1452212109055365286") {
+                // הודעה קטנה שהוא נשלח בהצלחה, אך העמוד נשאר פתוח ללחיצות נוספות
+                alert("נשלח בהצלחה (ללא הגבלה)!");
+            } else {
+                // משתמש רגיל מועבר אוטומטית למסך התודה
+                document.getElementById('discord-section').classList.add('hidden');
+                document.getElementById('thanks-section').classList.remove('hidden');
+            }
         }).catch((error) => {
             console.error(error);
             alert("הייתה בעיה בשליחת הנתונים.");
